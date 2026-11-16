@@ -1,0 +1,14 @@
+[project]
+name = "dejaview"
+version = "0.1.0"
+description = "Find the film you half remember: a from-scratch search engine with ML re-ranking."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

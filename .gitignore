@@ -1,0 +1,9 @@
+__pycache__/
+.venv/
+.pytest_cache/
+node_modules/
+dist/
+.env
+.skipper/
+# crawled pages, built index and embeddings are regenerated, not committed
+data/
