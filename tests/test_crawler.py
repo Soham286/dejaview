@@ -18,6 +18,11 @@ def test_film_links_keeps_only_italic_article_links():
     assert film_links(LIST_PAGE) == ["/wiki/Groundhog_Day_(film)", "/wiki/Mission:_Impossible_(film)"]
 
 
+def test_film_links_percent_encodes_non_ascii_once():
+    html = '<i><a href="/wiki/El_Niño_(film)">a</a> <a href="/wiki/Am%C3%A9lie">b</a></i>'
+    assert film_links(html) == ["/wiki/El_Ni%C3%B1o_(film)", "/wiki/Am%C3%A9lie"]
+
+
 def test_store_round_trip(tmp_path):
     store = Store(tmp_path / "pages.db")
     assert "/wiki/X" not in store and store.get("/wiki/X") is None

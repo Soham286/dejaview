@@ -7,7 +7,9 @@ import argparse
 import gzip
 import sqlite3
 import time
+import http.client
 import urllib.error
+import urllib.parse
 import urllib.request
 import urllib.robotparser
 import zlib
@@ -35,7 +37,9 @@ class _FilmLinks(HTMLParser):
             if path.startswith("./"):
                 path = "/wiki/" + path[2:]
             if path.startswith("/wiki/") and not path[6:].startswith(NAMESPACES):
-                self.links[path] = None
+                # some hrefs carry raw non-ASCII ("Núñez"), which urllib refuses; "%" stays safe so
+                # already-encoded paths are not encoded twice
+                self.links[urllib.parse.quote(path, safe="%/:=&?~+!$,;'@()*[]")] = None
 
     def handle_endtag(self, tag):
         if tag == "i" and self.italic:
@@ -114,7 +118,7 @@ class Fetcher:
                 if e.code not in (429, 503):
                     return None
                 time.sleep(30 * (attempt + 1))  # server asked us to slow down
-            except (urllib.error.URLError, TimeoutError):
+            except (OSError, http.client.HTTPException):  # dropped connection, timeout, truncated body
                 time.sleep(5)
         return None
 
