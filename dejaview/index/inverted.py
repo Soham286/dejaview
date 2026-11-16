@@ -67,7 +67,8 @@ class Index:
     """Read side: document lengths in memory, postings read from disk per query term."""
 
     def __init__(self, db_path):
-        self.db = sqlite3.connect(db_path)
+        # read-only use; the API serves every request from one connection (see api/app.py)
+        self.db = sqlite3.connect(db_path, check_same_thread=False)
         self.lengths = dict(self.db.execute("SELECT id, length FROM doc_len"))
         self.n = len(self.lengths)
         self.avgdl = sum(self.lengths.values()) / self.n if self.n else 0.0
