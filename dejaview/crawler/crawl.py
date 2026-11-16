@@ -70,6 +70,10 @@ class Store:
         row = self.db.execute("SELECT html FROM pages WHERE path = ?", (path,)).fetchone()
         return zlib.decompress(row[0]).decode() if row else None
 
+    def items(self):
+        for path, blob in self.db.execute("SELECT path, html FROM pages ORDER BY path"):
+            yield path, zlib.decompress(blob).decode()
+
     def put(self, path, html):
         self.db.execute("INSERT OR REPLACE INTO pages (path, html) VALUES (?, ?)", (path, zlib.compress(html.encode())))
         self.db.commit()
