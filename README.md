@@ -32,6 +32,7 @@ uv run python -m pytest
 uv run python -m dejaview.crawler.crawl     # fetch film pages into data/pages.db (resumable)
 uv run python -m dejaview.parser.parse      # pages -> film records in data/films.db
 uv run python -m dejaview.index.inverted    # build the search index
+uv run python -m dejaview.ranking.reranker --build   # embed plots for smart search (downloads the model once)
 uv run python -m uvicorn dejaview.api.app:app --reload   # API at http://127.0.0.1:8000/docs
 npm install --prefix web                    # once
 npm run dev --prefix web                    # UI at http://localhost:5173 (needs the API running)
