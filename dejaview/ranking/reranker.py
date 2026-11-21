@@ -68,7 +68,7 @@ class Reranker:
         return best
 
 
-def hybrid_search(index, reranker, query, k=10):
+def hybrid_search(index, reranker, query, k=10, weight=SEMANTIC_WEIGHT):
     """Top k as (film id, score, bm25, semantic), best first.
 
     Candidates are BM25's top films plus the embeddings' top films, so a description
@@ -84,7 +84,7 @@ def hybrid_search(index, reranker, query, k=10):
     hits = []
     for doc in set(keyword) | {int(d) for d in dense if np.isfinite(sims[d])}:
         bm25, semantic = keyword.get(doc, 0.0), float(sims[doc])
-        hits.append((doc, (1 - SEMANTIC_WEIGHT) * bm25 / top + SEMANTIC_WEIGHT * semantic, bm25, semantic))
+        hits.append((doc, (1 - weight) * bm25 / top + weight * semantic, bm25, semantic))
     return heapq.nlargest(k, hits, key=lambda hit: (hit[1], -hit[0]))
 
 
