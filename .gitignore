@@ -7,3 +7,10 @@ dist/
 .skipper/
 # crawled pages, built index and embeddings are regenerated, not committed
 data/
+# landing page build tools (taste skill checks and screenshots)
+docs/.taste-skill/
+docs/shots/
+# Skipper — machine-local artifacts (hook scratch + derived index), never commit
+.claude/.skipper-*
+.skipper/*
+!.skipper/receipts/
