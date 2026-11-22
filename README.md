@@ -4,9 +4,11 @@
 
 **Project site:** [soham286.github.io/dejaview](https://soham286.github.io/dejaview/)
 
-![Dejaview finding Inception from "thieves sneak into dreams to plant an idea"](docs/screenshot.jpg)
+[![The Dejaview project site](docs/landing.jpg)](https://soham286.github.io/dejaview/)
 
 Dejaview is a search engine built from scratch: its own web crawler, parser, inverted index and BM25 ranking, with a machine-learning re-ranker that understands meaning, not just matching words. It searches 12,543 American films from 1970 to 2025.
+
+![The Dejaview app finding Inception from "thieves sneak into dreams to plant an idea"](docs/screenshot.jpg)
 
 ## Results
 
