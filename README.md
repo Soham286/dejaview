@@ -2,6 +2,8 @@
 
 **Find the film you half remember.** Describe a scene, a character or the ending in your own words, and Dejaview finds the film, even when your description shares no words with the plot.
 
+**Project site:** [soham286.github.io/dejaview](https://soham286.github.io/dejaview/)
+
 ![Dejaview finding Inception from "thieves sneak into dreams to plant an idea"](docs/screenshot.jpg)
 
 Dejaview is a search engine built from scratch: its own web crawler, parser, inverted index and BM25 ranking, with a machine-learning re-ranker that understands meaning, not just matching words. It searches 12,543 American films from 1970 to 2025.
